@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treinamento da Rede - Grupo Boticário</title>
+    <style>
+        /* Reset básico para visualização perfeita no computador */
+        body { margin: 0; padding: 0; overflow-x: hidden; background-color: #F5F1EB; }
+    </style>
+</head>
+<body>
+
+    <!-- ======================================================= -->
+    <!-- BLOCO 1: PARTE CLARA (COPIE ESTA PARTE PARA O STRAPI) -->
+    <!-- ======================================================= -->
+    <div id="gb-nova-pagina-branca">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+            #gb-nova-pagina-branca {
+                --gb-marinho: #011E38;
+                --gb-offwhite: #F5F1EB;
+                --gb-azul-royal: #264FEC;
+                --gb-salmao: #FFBC82;
+                
+                font-family: 'IBM Plex Sans', sans-serif;
+                background-color: var(--gb-offwhite) !important;
+                
+                width: 100vw !important;
+                position: relative !important;
+                left: 50% !important;
+                right: 50% !important;
+                margin-left: -50vw !important;
+                margin-right: -50vw !important;
+                overflow: hidden;
+            }
+
+            #gb-nova-pagina-branca * {
+                box-sizing: border-box !important;
+            }
+
+            /* Banner Superior com Animação de Movimento */
+            #gb-nova-pagina-branca .gb-top-banner {
+                width: 100%;
+                height: 300px;
+                background: linear-gradient(rgba(1, 30, 56, 0.4), rgba(1, 30, 56, 0.8)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1920&q=80') no-repeat;
+                background-size: 120% 120%; /* Ampliado para permitir a movimentação do fundo */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 0 20px;
+                position: relative;
+                overflow: hidden;
+                /* Efeito que remove o aspecto estático */
+                animation: moveBanner 15s linear infinite alternate;
+            }
+
+            /* Efeito de Sobreposição (Hover) do Banner Principal */
+            #gb-nova-pagina-branca .gb-top-banner::before {
+                content: "";
+                position: absolute;
+                top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(38, 79, 236, 0.25); /* Azul Royal com transparência */
+                opacity: 0;
+                transition: opacity 0.5s ease;
+                z-index: 1;
+            }
+
+            #gb-nova-pagina-branca .gb-top-banner:hover::before {
+                opacity: 1;
+            }
+
+            /* Keyframe para o movimento do banner */
+            @keyframes moveBanner {
+                0% { background-position: 0% 50%; }
+                100% { background-position: 100% 50%; }
+            }
+
+            #gb-nova-pagina-branca .gb-top-banner h2 {
+                color: var(--gb-offwhite);
+                font-size: 36px;
+                font-weight: 700;
+                margin: 0;
+                position: relative;
+                z-index: 2; /* Mantém o texto acima da sobreposição */
+            }
+
+            /* Área de Boas-vindas */
+            #gb-nova-pagina-branca .gb-wrap {
+                max-width: 1300px;
+                margin: 0 auto;
+                padding: 80px 100px !important;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 60px;
+            }
+
+            #gb-nova-pagina-branca .gb-eyebrow {
+                font-family: 'IBM Plex Sans', sans-serif;
+                font-weight: 600;
+                font-size: 14px;
+                color: var(--gb-azul-royal);
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 16px;
+            }
+
+            #gb-nova-pagina-branca h1 {
+                color: var(--gb-marinho);
+                font-size: 42px;
+                font-weight: 700;
+                line-height: 1.2;
+                margin: 0 0 16px 0;
+            }
+
+            #gb-nova-pagina-branca p {
+                color: var(--gb-marinho);
+                opacity: 0.85;
+                font-size: 18px;
+                line-height: 1.6;
+                margin: 0 0 40px 0;
+                max-width: 550px;
+            }
+
+            #gb-nova-pagina-branca .gb-hero-cta {
+                display: inline-block;
+                background-color: var(--gb-azul-royal);
+                color: var(--gb-offwhite);
+                font-weight: 600;
+                text-decoration: none;
+                padding: 16px 32px;
+                border-radius: 50px;
+                transition: all 0.3s ease;
+            }
+
+            #gb-nova-pagina-branca .gb-hero-cta:hover {
+                transform: translateY(-3px);
+                background-color: var(--gb-marinho);
+                box-shadow: 0 12px 24px rgba(1, 30, 56, 0.2);
+            }
+
+            #gb-nova-pagina-branca .gb-hero-image-wrapper {
+                flex: 1;
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            /* Imagem Lateral com Efeito de Flutuação */
+            #gb-nova-pagina-branca .gb-hero-img {
+                max-width: 100%;
+                width: 100%;
+                height: auto;
+                border-radius: 24px;
+                box-shadow: 0 20px 40px rgba(1, 30, 56, 0.1);
+                /* Animação que cria o movimento */
+                animation: floatImage 5s ease-in-out infinite;
+            }
+
+            /* Keyframe de flutuação da imagem lateral */
+            @keyframes floatImage {
+                0% { transform: translateY(0); box-shadow: 0 20px 40px rgba(1, 30, 56, 0.1); }
+                50% { transform: translateY(-15px); box-shadow: 0 30px 50px rgba(1, 30, 56, 0.2); }
+                100% { transform: translateY(0); box-shadow: 0 20px 40px rgba(1, 30, 56, 0.1); }
+            }
+
+            @media (max-width: 980px) {
+                #gb-nova-pagina-branca .gb-top-banner { height: 200px; }
+                #gb-nova-pagina-branca .gb-wrap {
+                    padding: 60px 24px !important;
+                    flex-direction: column;
+                    text-align: center;
+                }
+                #gb-nova-pagina-branca p { margin: 0 auto 32px auto; }
+            }
+        </style>
+
+        <div class="gb-top-banner">
+            <h2>Portal de Treinamento e Indicadores</h2>
+        </div>
+
+        <div class="gb-wrap">
+            <div class="gb-hero-text">
+                <div class="gb-eyebrow">Apoio à Rede</div>
+                <h1>Boas-vindas ao Treinamento da Rede.</h1>
+                <p>Esta página foi desenvolvida exclusivamente para apoiá-lo. Aqui centralizamos todas as informações sobre os nossos modelos de atendimento, os indicadores de performance (Dash GI), além de ser o seu canal direto para sugestões e atualizações importantes.</p>
+                <a href="#gb-nova-pagina-azul" class="gb-hero-cta">Explorar Conteúdos</a>
+            </div>
+            <div class="gb-hero-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=800&q=80" class="gb-hero-img" alt="Equipe em Treinamento">
+            </div>
+        </div>
+    </div>
+    <!-- ======================================================= -->
+    <!-- FIM DO BLOCO 1 -->
+    <!-- ======================================================= -->
+
+
+
+    <!-- ======================================================= -->
+    <!-- BLOCO 2: PARTE ESCURA (COPIE ESTA PARTE PARA O STRAPI) -->
+    <!-- ======================================================= -->
+    <div id="gb-nova-pagina-azul">
+        <style>
+            #gb-nova-pagina-azul {
+                --gb-marinho: #011E38;
+                --gb-offwhite: #F5F1EB;
+                --gb-azul-royal: #264FEC;
+                --gb-salmao: #FFBC82;
+                
+                font-family: 'IBM Plex Sans', sans-serif;
+                background-color: var(--gb-marinho) !important;
+                
+                width: 100vw !important;
+                position: relative !important;
+                left: 50% !important;
+                right: 50% !important;
+                margin-left: -50vw !important;
+                margin-right: -50vw !important;
+                padding: 80px 0;
+            }
+
+            #gb-nova-pagina-azul * {
+                box-sizing: border-box !important;
+            }
+
+            #gb-nova-pagina-azul .gb-wrap {
+                max-width: 1300px;
+                margin: 0 auto;
+                padding: 0 100px !important;
+                position: relative;
+            }
+
+            #gb-nova-pagina-azul .gb-section-title {
+                color: var(--gb-offwhite);
+                font-size: 32px;
+                font-weight: 700;
+                margin: 0 0 32px 0;
+                border-bottom: 2px solid rgba(245, 241, 235, 0.1);
+                padding-bottom: 16px;
+            }
+
+            /* Estilo dos Ícones Personalizados */
+            #gb-nova-pagina-azul .gb-title-with-icon {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                margin-bottom: 16px;
+            }
+
+            #gb-nova-pagina-azul .gb-title-with-icon h3,
+            #gb-nova-pagina-azul .gb-title-with-icon h2 {
+                margin: 0;
+            }
+
+            #gb-nova-pagina-azul .gb-icon-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 48px;
+                height: 48px;
+                background-color: var(--gb-offwhite);
+                border-radius: 12px;
+                color: var(--gb-azul-royal);
+                flex-shrink: 0;
+            }
+
+            #gb-nova-pagina-azul .gb-icon-wrapper svg {
+                width: 24px;
+                height: 24px;
+                stroke: currentColor;
+                stroke-width: 2;
+                fill: none;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+            }
+
+            /* 1. Grade de Frentes em Treinamento */
+            #gb-nova-pagina-azul .gb-frentes-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+                margin-bottom: 80px;
+            }
+
+            #gb-nova-pagina-azul .gb-card {
+                background-color: var(--gb-offwhite);
+                border-radius: 16px;
+                padding: 20px;
+                transition: transform 0.3s ease;
+                display: flex;
+                flex-direction: column;
+            }
+
+            #gb-nova-pagina-azul .gb-card:hover { transform: translateY(-5px); box-shadow: 0 16px 32px rgba(0,0,0,0.3); }
+            #gb-nova-pagina-azul .gb-card img { width: 100%; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 16px; }
+            #gb-nova-pagina-azul .gb-card h3 { color: var(--gb-marinho); font-size: 18px; margin: 0 0 8px 0; }
+            #gb-nova-pagina-azul .gb-card p { color: var(--gb-marinho); opacity: 0.8; font-size: 14px; line-height: 1.4; margin: 0 0 16px 0; flex-grow: 1; }
+
+            #gb-nova-pagina-azul .gb-btn {
+                display: inline-block;
+                text-align: center;
+                background-color: var(--gb-azul-royal);
+                color: var(--gb-offwhite);
+                font-weight: 600;
+                text-decoration: none;
+                padding: 10px 16px;
+                border-radius: 50px;
+                transition: all 0.3s ease;
+                width: 100%;
+                font-size: 14px;
+            }
+
+            #gb-nova-pagina-azul .gb-btn:hover { background-color: var(--gb-marinho); }
+            #gb-nova-pagina-azul .gb-btn-salmao { background-color: var(--gb-salmao); color: var(--gb-marinho); }
+            #gb-nova-pagina-azul .gb-btn-salmao:hover { background-color: var(--gb-offwhite); color: var(--gb-marinho); }
+
+            /* 2. Bloco Duplo */
+            #gb-nova-pagina-azul .gb-grid-2 {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+                margin-bottom: 80px;
+            }
+
+            #gb-nova-pagina-azul .gb-card-dark {
+                background-color: rgba(245, 241, 235, 0.05);
+                border: 1px solid rgba(245, 241, 235, 0.1);
+                border-radius: 16px;
+                padding: 32px;
+            }
+
+            #gb-nova-pagina-azul .gb-card-dark .gb-title-with-icon h3 { color: var(--gb-salmao); font-size: 22px; }
+            #gb-nova-pagina-azul .gb-card-dark p { color: rgba(245, 241, 235, 0.8); font-size: 15px; line-height: 1.5; margin: 0 0 24px 0; }
+
+            /* 3. Tutorial Dashboard */
+            #gb-nova-pagina-azul .gb-tutorial-card {
+                background-color: var(--gb-azul-royal);
+                border-radius: 24px;
+                padding: 40px;
+                display: flex;
+                align-items: flex-start;
+                gap: 40px;
+                margin-bottom: 80px;
+            }
+
+            #gb-nova-pagina-azul .gb-tutorial-text { flex: 1; }
+            #gb-nova-pagina-azul .gb-tutorial-text h3 { color: var(--gb-offwhite); font-size: 32px; margin: 0 0 16px 0; }
+            #gb-nova-pagina-azul .gb-tutorial-text p { color: var(--gb-offwhite); opacity: 0.9; font-size: 16px; line-height: 1.6; margin: 0 0 24px 0; }
+
+            #gb-nova-pagina-azul .gb-tutorial-links {
+                flex: 1;
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 16px;
+                width: 100%;
+            }
+
+            #gb-nova-pagina-azul .gb-link-item {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                background-color: rgba(1, 30, 56, 0.4);
+                padding: 12px 20px;
+                border-radius: 12px;
+                color: var(--gb-offwhite);
+                text-decoration: none;
+                font-weight: 600;
+                transition: 0.3s;
+                border: 1px solid transparent;
+            }
+
+            #gb-nova-pagina-azul .gb-link-item .gb-icon-wrapper {
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                background-color: rgba(245, 241, 235, 0.1);
+                color: var(--gb-salmao);
+            }
+
+            #gb-nova-pagina-azul .gb-link-item:hover {
+                background-color: var(--gb-marinho);
+                border-color: var(--gb-salmao);
+                color: var(--gb-salmao);
+            }
+
+            #gb-nova-pagina-azul .gb-link-item:hover .gb-icon-wrapper {
+                background-color: var(--gb-salmao);
+                color: var(--gb-marinho);
+            }
+
+            /* 4. Mini Feed de Notícias */
+            #gb-nova-pagina-azul .gb-news-feed {
+                background-color: rgba(245, 241, 235, 0.03);
+                border: 1px solid rgba(245, 241, 235, 0.1);
+                border-radius: 16px;
+                padding: 24px;
+                max-height: 450px;
+                overflow-y: auto;
+                margin-bottom: 80px;
+                scrollbar-width: thin;
+                scrollbar-color: var(--gb-salmao) rgba(245, 241, 235, 0.1);
+            }
+
+            #gb-nova-pagina-azul .gb-news-feed::-webkit-scrollbar { width: 8px; }
+            #gb-nova-pagina-azul .gb-news-feed::-webkit-scrollbar-track { background: rgba(245, 241, 235, 0.1); border-radius: 10px; }
+            #gb-nova-pagina-azul .gb-news-feed::-webkit-scrollbar-thumb { background: var(--gb-salmao); border-radius: 10px; }
+
+            #gb-nova-pagina-azul .gb-news-item {
+                display: flex;
+                gap: 20px;
+                padding-bottom: 24px;
+                margin-bottom: 24px;
+                border-bottom: 1px solid rgba(245, 241, 235, 0.1);
+            }
+
+            #gb-nova-pagina-azul .gb-news-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+            #gb-nova-pagina-azul .gb-news-thumb { width: 100px; height: 100px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+            #gb-nova-pagina-azul .gb-news-content { display: flex; flex-direction: column; justify-content: center; }
+            #gb-nova-pagina-azul .gb-news-date { color: var(--gb-salmao); font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 4px; }
+            #gb-nova-pagina-azul .gb-news-content h4 { color: var(--gb-offwhite); font-size: 18px; margin: 0 0 8px 0; }
+            #gb-nova-pagina-azul .gb-news-content p { color: rgba(245, 241, 235, 0.8); font-size: 14px; line-height: 1.5; margin: 0; }
+
+            /* 5. FAQ */
+            #gb-nova-pagina-azul .gb-faq-section { margin-bottom: 60px; }
+            #gb-nova-pagina-azul details { margin-bottom: 16px; background-color: var(--gb-offwhite); border-radius: 12px; }
+            
+            #gb-nova-pagina-azul summary {
+                padding: 24px;
+                color: var(--gb-marinho);
+                font-weight: 700;
+                font-size: 18px;
+                cursor: pointer;
+                list-style: none;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            #gb-nova-pagina-azul summary::-webkit-details-marker { display: none; }
+            #gb-nova-pagina-azul summary::after { content: '+'; color: var(--gb-azul-royal); font-size: 24px; }
+            #gb-nova-pagina-azul details[open] summary::after { content: '-'; }
+
+            #gb-nova-pagina-azul details p { padding: 0 24px 16px 24px; color: var(--gb-marinho); opacity: 0.9; line-height: 1.6; margin: 0; }
+
+            #gb-nova-pagina-azul .gb-btn-faq {
+                display: inline-block;
+                margin: 0 24px 24px 24px;
+                padding: 10px 20px;
+                background-color: var(--gb-azul-royal);
+                color: var(--gb-offwhite);
+                border-radius: 50px;
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 600;
+                transition: 0.3s;
+            }
+
+            #gb-nova-pagina-azul .gb-btn-faq:hover { background-color: var(--gb-marinho); }
+
+            /* 6. GB Resolve */
+            #gb-nova-pagina-azul .gb-closing-bar {
+                background-color: rgba(245, 241, 235, 0.05);
+                border: 1px solid rgba(245, 241, 235, 0.1);
+                border-radius: 16px;
+                padding: 24px 32px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 24px;
+            }
+
+            #gb-nova-pagina-azul .gb-closing-text { flex: 1; }
+            #gb-nova-pagina-azul .gb-closing-text .gb-title-with-icon h2 { color: var(--gb-salmao); font-size: 20px; }
+            #gb-nova-pagina-azul .gb-closing-text p { color: rgba(245, 241, 235, 0.9); font-size: 15px; margin: 0; line-height: 1.5; }
+            #gb-nova-pagina-azul .gb-btn-closing { white-space: nowrap; }
+
+            /* Responsividade */
+            @media (max-width: 980px) {
+                #gb-nova-pagina-azul .gb-wrap { padding: 0 24px !important; }
+                #gb-nova-pagina-azul .gb-grid-2 { grid-template-columns: 1fr; }
+                #gb-nova-pagina-azul .gb-tutorial-card { flex-direction: column; padding: 32px 24px; }
+                #gb-nova-pagina-azul .gb-news-item { flex-direction: column; gap: 12px; }
+                #gb-nova-pagina-azul .gb-news-thumb { width: 100%; height: 160px; }
+                #gb-nova-pagina-azul .gb-closing-bar { flex-direction: column; text-align: center; padding: 24px; }
+                #gb-nova-pagina-azul .gb-closing-text .gb-title-with-icon { justify-content: center; }
+            }
+        </style>
+
+        <div class="gb-wrap">
+            
+            <!-- 1. Principais frentes em treinamento (5 blocos) -->
+            <h2 class="gb-section-title">Principais frentes em treinamento</h2>
+            <div class="gb-frentes-grid">
+                <div class="gb-card">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=300&q=80" alt="Consultores">
+                    <h3>Consultores de Loja</h3>
+                    <p>Trilhas e materiais focados no desenvolvimento consultivo.</p>
+                    <a href="#" class="gb-btn">Acessar</a>
+                </div>
+                <div class="gb-card">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=300&q=80" alt="Lideranças">
+                    <h3>Lideranças</h3>
+                    <p>Conteúdos para a gestão do canal loja e Venda Direta.</p>
+                    <a href="#" class="gb-btn">Acessar</a>
+                </div>
+                <div class="gb-card">
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=300&q=80" alt="Multiplicadores">
+                    <h3>Multiplicadores</h3>
+                    <p>Capacitação e ferramentas para quem multiplica na ponta.</p>
+                    <a href="#" class="gb-btn">Acessar</a>
+                </div>
+                <div class="gb-card">
+                    <img src="https://images.unsplash.com/photo-1556740749-887f6717d5e4?auto=format&fit=crop&w=300&q=80" alt="Venda Direta">
+                    <h3>Venda Direta</h3>
+                    <p>Estratégias específicas para impulsionar o canal VD.</p>
+                    <a href="#" class="gb-btn">Acessar</a>
+                </div>
+                <div class="gb-card">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=300&q=80" alt="Operações">
+                    <h3>Padrão e Operação</h3>
+                    <p>Treinamentos voltados à rotina e processos da loja.</p>
+                    <a href="#" class="gb-btn">Acessar</a>
+                </div>
+            </div>
+
+            <!-- 2. Ferramentas e Apoio (IEF + Sugestões) -->
+            <div class="gb-grid-2">
+                <div class="gb-card-dark">
+                    <div class="gb-title-with-icon">
+                        <div class="gb-icon-wrapper">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        </div>
+                        <h3>Cursos Obrigatórios (IEF)</h3>
+                    </div>
+                    <p>Baixe a planilha atualizada com a relação de todos os cursos cobrados por cargo no indicador de treinamento.</p>
+                    <a href="#" class="gb-btn gb-btn-salmao" style="width: auto;">Baixar Planilha IEF</a>
+                </div>
+                <div class="gb-card-dark">
+                    <div class="gb-title-with-icon">
+                        <div class="gb-icon-wrapper">
+                            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        </div>
+                        <h3>Sugestões de Melhoria</h3>
+                    </div>
+                    <p>Queremos ouvir você. Deixe a sua sugestão para melhorarmos a plataforma ou os treinamentos da área.</p>
+                    <a href="#" class="gb-btn" style="width: auto;">Enviar Sugestão</a>
+                </div>
+            </div>
+
+            <!-- 3. Tutorial Dashboard -->
+            <div class="gb-tutorial-card">
+                <div class="gb-tutorial-text">
+                    <h3>Dashboard GI</h3>
+                    <p>Acompanhe o indicador de treinamento da sua loja de forma simples e rápida.</p>
+                    <p>Abaixo você encontra os manuais em PDF e infográficos em imagem ensinando o passo a passo de como acessar, ler as informações e extrair relatórios da aba do Dash GI.</p>
+                </div>
+                <div class="gb-tutorial-links">
+                    <a href="#" target="_blank" class="gb-link-item">
+                        <div class="gb-icon-wrapper">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                        </div>
+                        Tutorial de Acesso ao Painel (PDF)
+                    </a>
+                    <a href="#" target="_blank" class="gb-link-item">
+                        <div class="gb-icon-wrapper">
+                            <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                        </div>
+                        Infográfico: Entendendo as Métricas
+                    </a>
+                    <a href="#" target="_blank" class="gb-link-item">
+                        <div class="gb-icon-wrapper">
+                            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                        </div>
+                        Como Extrair Relatórios Mensais (PDF)
+                    </a>
+                </div>
+            </div>
+
+            <!-- 4. Mini Feed de Notícias e Lançamentos -->
+            <h2 class="gb-section-title">Novidades e Lançamentos</h2>
+            <div class="gb-news-feed">
+                <div class="gb-news-item">
+                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=200&q=80" alt="Notícia" class="gb-news-thumb">
+                    <div class="gb-news-content">
+                        <span class="gb-news-date">Hoje</span>
+                        <h4>Nova Trilha de Atendimento Disponível</h4>
+                        <p>Lançamos a nova trilha consultiva. Acesse a plataforma e confira os novos módulos que já estão ativos para toda a rede.</p>
+                    </div>
+                </div>
+                <div class="gb-news-item">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=200&q=80" alt="Notícia" class="gb-news-thumb">
+                    <div class="gb-news-content">
+                        <span class="gb-news-date">Há 2 dias</span>
+                        <h4>Melhorias de Performance na Plataforma</h4>
+                        <p>Otimizamos o carregamento dos vídeos para quem estuda pelo celular, garantindo uma experiência mais rápida e fluida.</p>
+                    </div>
+                </div>
+                <div class="gb-news-item">
+                    <img src="https://images.unsplash.com/photo-1542744094-24638ea0b3b5?auto=format&fit=crop&w=200&q=80" alt="Notícia" class="gb-news-thumb">
+                    <div class="gb-news-content">
+                        <span class="gb-news-date">Semana Passada</span>
+                        <h4>Treinamentos do Novo Ciclo</h4>
+                        <p>Os materiais de apoio do novo ciclo promocional já estão liberados para download na aba de Biblioteca do Consultor.</p>
+                    </div>
+                </div>
+                <div class="gb-news-item">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=200&q=80" alt="Notícia" class="gb-news-thumb">
+                    <div class="gb-news-content">
+                        <span class="gb-news-date">Mês Passado</span>
+                        <h4>Reconhecimento: Lojas Destaque</h4>
+                        <p>Parabéns às lojas que bateram 100% no indicador de cursos obrigatórios neste último trimestre!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. FAQ Estratégico com Botões -->
+            <div class="gb-faq-section">
+                <h2 class="gb-section-title">Dúvidas Frequentes</h2>
+                
+                <details>
+                    <summary>Como funciona o Indicador de Treinamento de Ciclo?</summary>
+                    <p>Este indicador mede a conclusão dos treinamentos focados nos lançamentos e estratégias de cada ciclo vigente. Ele deve ser realizado no período estipulado para garantir a pontuação correta da sua equipe.</p>
+                    <a href="#" class="gb-btn-faq">Baixar Material Completo</a>
+                </details>
+                
+                <details>
+                    <summary>Como acompanhar o Indicador de Academy?</summary>
+                    <p>O indicador de Academy reflete as trilhas e formações contínuas. Você pode visualizar o progresso da sua equipe diretamente no Dash GI, filtrando pela aba específica de Academy.</p>
+                    <a href="#" class="gb-btn-faq">Baixar Material Completo</a>
+                </details>
+                
+                <details>
+                    <summary>Como acessar os treinamentos opcionais e gerais?</summary>
+                    <p>Além dos cursos obrigatórios da matriz IEF, a plataforma possui uma biblioteca livre. Basta acessar o menu de "Catálogo" ou "Treinamentos Gerais" para se inscrever nos cursos opcionais de desenvolvimento.</p>
+                    <a href="#" class="gb-btn-faq">Baixar Material Completo</a>
+                </details>
+            </div>
+
+            <!-- 6. GB Resolve - Barra Compacta -->
+            <div class="gb-closing-bar">
+                <div class="gb-closing-text">
+                    <div class="gb-title-with-icon" style="margin-bottom: 8px;">
+                        <div class="gb-icon-wrapper" style="width: 40px; height: 40px;">
+                            <svg viewBox="0 0 24 24" style="width: 20px; height: 20px;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+                        </div>
+                        <h2>Precisa de mais ajuda?</h2>
+                    </div>
+                    <p>Para problemas de acesso à plataforma, erros de sistema ou dúvidas complexas sobre indicadores, abra um chamado no nosso canal oficial.</p>
+                </div>
+                <a href="#" class="gb-btn gb-btn-salmao gb-btn-closing" style="width: auto;">Acessar o GB Resolve</a>
+            </div>
+
+        </div>
+    </div>
+    <!-- ======================================================= -->
+    <!-- FIM DO BLOCO 2 -->
+    <!-- ======================================================= -->
+
+</body>
+</html>
